@@ -4,7 +4,7 @@ import type { NextPage } from "next";
 import type { AppType, AppProps } from "next/app";
 import type { ReactElement, ReactNode } from "react";
 
-import "~/styles/globals.css";
+import "../styles/globals.css";
 import { DefaultLayout } from "@/components/DefaultLayout";
 
 export type NextPageWithLayout<

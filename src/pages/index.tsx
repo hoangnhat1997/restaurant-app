@@ -1,11 +1,7 @@
-import React from "react";
+import RestaurantList from "./restaurant";
+import type { NextPageWithLayout } from "./_app";
 
-const Home: React.FC = () => {
-  return (
-    <div>
-      <h1>Restaurant List</h1>
-    </div>
-  );
+const IndexPage: NextPageWithLayout = () => {
+  return <RestaurantList />;
 };
-
-export default Home;
+export default IndexPage;
