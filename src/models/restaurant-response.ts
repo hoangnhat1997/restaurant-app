@@ -1,3 +1,5 @@
+import { JsonValue } from "@prisma/client/runtime/library";
+
 export interface RestaurantResponse {
   id: string;
   rating: number;
@@ -8,6 +10,6 @@ export interface RestaurantResponse {
   images: string[];
   name: string;
   price_range: string;
-  featured: Record<string, any>;
+  featured: JsonValue;
   isFavorite: boolean;
 }

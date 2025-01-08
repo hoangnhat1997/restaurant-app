@@ -9,7 +9,7 @@ import { z } from "zod";
 import { prisma } from "../prisma";
 
 /**
- * Default selector for Post.
+ * Default selector for restaurant.
  * It's important to always explicitly say which fields you want to return in order to not leak extra information
  * @see https://github.com/prisma/prisma/issues/9353
  */
@@ -27,7 +27,7 @@ const defaultRestaurantSelect = {
   isFavorite: true,
 } satisfies Prisma.RestaurantSelect;
 
-export const postRouter = router({
+export const restaurantRouter = router({
   list: publicProcedure
     .input(
       z.object({
@@ -77,31 +77,29 @@ export const postRouter = router({
     )
     .query(async ({ input }) => {
       const { id } = input;
-      const post = await prisma.restaurant.findUnique({
+      const restaurant = await prisma.restaurant.findUnique({
         where: { id },
         select: defaultRestaurantSelect,
       });
-      if (!post) {
+      if (!restaurant) {
         throw new TRPCError({
           code: "NOT_FOUND",
-          message: `No post with id '${id}'`,
+          message: `No restaurant with id '${id}'`,
         });
       }
-      return post;
+      return restaurant;
     }),
   add: publicProcedure
     .input(
       z.object({
-        id: z.string().uuid().optional(),
-        isFavorite: z.boolean().optional(),
+        id: z.string(),
+        isFavorite: z.boolean(),
       })
     )
     .mutation(async ({ input }) => {
       const isFavorite = await prisma.restaurant.update({
         where: { id: input.id },
-        data: {
-          isFavorite: input.isFavorite,
-        },
+        data: { isFavorite: input.isFavorite },
       });
       return isFavorite;
     }),

@@ -1,5 +1,7 @@
 import { faStar, faHeart } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
+import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 import React from "react";
 interface RestaurantItemProps {
   id: string;
@@ -33,9 +35,16 @@ const RestaurantItem = ({
           height={200}
           className="w-full h-48 object-cover border-b rounded-lg"
         />
-        <button className="absolute top-2 right-2 bg-white bg-opacity-50 rounded-full">
+        <button
+          onClick={onFavorite}
+          className="absolute top-2 right-2 bg-white bg-opacity-50 rounded-full"
+        >
           <div className="flex items-center justify-center w-8 h-8 rounded-full">
-            <FontAwesomeIcon color="red" icon={faHeart} />
+            {isFavorite ? (
+              <FontAwesomeIcon color="red" icon={faHeartSolid} />
+            ) : (
+              <FontAwesomeIcon color="white" icon={faHeartRegular} />
+            )}
           </div>
         </button>
       </div>

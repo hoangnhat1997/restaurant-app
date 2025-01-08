@@ -22,7 +22,7 @@ enum STORE_CATEGORY {
   OTHER = "OTHER",
 }
 
-const textByStoreCategory = {
+export const textByStoreCategory = {
   [STORE_CATEGORY.SUSHI]: "스시·해산물",
   [STORE_CATEGORY.UNAGI]: "장어",
   [STORE_CATEGORY.TEMPURA]: "덴푸라",
