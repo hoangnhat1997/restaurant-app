@@ -1,7 +1,7 @@
-import RestaurantList from "./restaurant";
 import type { NextPageWithLayout } from "./_app";
+import HomePage from "./home";
 
 const IndexPage: NextPageWithLayout = () => {
-  return <RestaurantList />;
+  return <HomePage />;
 };
 export default IndexPage;

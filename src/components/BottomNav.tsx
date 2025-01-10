@@ -2,19 +2,20 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
-  AiOutlineHome,
-  AiOutlineSearch,
-  AiOutlineCalendar,
-  AiOutlineMenu,
-} from "react-icons/ai";
-import { BiMessageSquareDetail } from "react-icons/bi";
+  faHome,
+  faSearch,
+  faCommentDots,
+  faCalendarAlt,
+  faBars,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const navItems = [
-  { label: "홈", href: "/", icon: <AiOutlineHome /> },
-  { label: "검색", href: "/search", icon: <AiOutlineSearch /> },
-  { label: "피드", href: "/feed", icon: <BiMessageSquareDetail /> },
-  { label: "내 예약", href: "/reservations", icon: <AiOutlineCalendar /> },
-  { label: "메뉴", href: "/menu", icon: <AiOutlineMenu /> },
+  { label: "홈", href: "/", icon: faHome },
+  { label: "검색", href: "/search", icon: faSearch },
+  { label: "피드", href: "/feed", icon: faCommentDots },
+  { label: "내 예약", href: "/reservations", icon: faCalendarAlt },
+  { label: "메뉴", href: "/menu", icon: faBars },
 ];
 
 const BottomNav = () => {
@@ -32,7 +33,7 @@ const BottomNav = () => {
                   : "text-gray-500"
               }`}
             >
-              {item.icon}
+              <FontAwesomeIcon icon={item.icon} size="lg" />
               <span>{item.label}</span>
             </div>
           </Link>

@@ -3,26 +3,21 @@ import { trpc } from "@/utils/trpc";
 import { NextPageWithLayout } from "../_app";
 import { faMagnifyingGlass, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { use, useEffect, useState } from "react";
 import { textByStoreCategory } from "@/utils/categories";
 import { inferProcedureInput } from "@trpc/server";
 import { AppRouter } from "@/server/routers/_app";
 import { RestaurantResponse } from "@/models/restaurant-response";
 
-const RestaurantList: NextPageWithLayout = () => {
+const SearchPage: NextPageWithLayout = () => {
   const [selectedCategory, setSelectedCategory] = useState(
-    Object.keys(textByStoreCategory)[0]
+    // Object.keys(textByStoreCategory)[0]
+    null
   );
 
   const [restaurantData, setRestaurantData] = useState<RestaurantResponse[]>(
     []
   );
-
-  const addPost = trpc.restaurant.add.useMutation({
-    async onSuccess() {
-      await utils.restaurant.list.invalidate();
-    },
-  });
 
   const { data, fetchNextPage, hasNextPage, isLoading } =
     trpc.restaurant.list.useInfiniteQuery(
@@ -35,6 +30,19 @@ const RestaurantList: NextPageWithLayout = () => {
         },
       }
     );
+
+  useEffect(() => {
+    if (data) {
+      const allRestaurants = data.pages.flatMap((page) => page.items);
+      setRestaurantData(allRestaurants);
+    }
+  }, [data]);
+
+  const addPost = trpc.restaurant.add.useMutation({
+    async onSuccess() {
+      await utils.restaurant.list.invalidate();
+    },
+  });
 
   const toggleFavorite = (id: string, isFavorite: boolean) => {
     try {
@@ -133,4 +141,4 @@ const RestaurantList: NextPageWithLayout = () => {
   );
 };
 
-export default RestaurantList;
+export default SearchPage;
